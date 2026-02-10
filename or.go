@@ -58,7 +58,7 @@ func Or(channels ...<-chan any) <-chan struct{} {
 	// готовим 'одноразовую' функцию для закрытия результирующего канала
 	closeOnce := sync.Once{}
 
-	// запускаем цикл
+	// проверяем базывые кейсы и запускаем цикл
 	switch len(filtered) {
 	case 0:
 		cancel()
@@ -130,7 +130,7 @@ func OrContext(ctx context.Context, channels ...<-chan any) <-chan struct{} {
 	// готовим 'одноразовую' функцию для закрытия результирующего канала
 	closeOnce := sync.Once{}
 
-	// запускаем цикл
+	// проверяем базовые кейсы
 	switch len(filtered) {
 	case 0:
 		close(out)
@@ -147,7 +147,7 @@ func OrContext(ctx context.Context, channels ...<-chan any) <-chan struct{} {
 		return out
 	default:
 		orCtx, cancel := context.WithCancel(ctx)
-
+		// запускаем прослушивание в цикле
 		for _, v := range filtered {
 			go func(ch <-chan any) {
 				select {

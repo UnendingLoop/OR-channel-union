@@ -40,12 +40,10 @@ func TestOrPackage(t *testing.T) {
 			wantTimeMax:  1200 * time.Millisecond,
 		},
 		{
-			name: "5 nil-CHs in slice",
-			setupChArray: func() []<-chan any {
-				return []<-chan any{nil, nil, nil, nil, nil}
-			},
-			wantTimeMin: 0 * time.Second,
-			wantTimeMax: 900 * time.Millisecond,
+			name:         "5 nil-CHs in slice",
+			setupChArray: func() []<-chan any { return []<-chan any{nil, nil, nil, nil, nil} },
+			wantTimeMin:  0 * time.Second,
+			wantTimeMax:  900 * time.Millisecond,
 		},
 	}
 
